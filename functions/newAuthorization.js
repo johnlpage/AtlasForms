@@ -15,6 +15,14 @@ class Authorization {
     this.READ_DOCUMENT = 'READDOC' /* User can read a specific document (Can query) */
 
     this.customFunctions = {}
+    this.createTime = new Date(); /* Using this class for timing too */
+    this.lastTime = new Date();
+  }
+  
+  timingInfo(msg) {
+    const now = new Date()
+    console.log(`Timing: rel: ${now - this.lastTime} abs: ${now - this.createTime} = ${msg}`)
+    this.lastTime = now
   }
 
   async lookupUser (user) {
@@ -22,7 +30,7 @@ class Authorization {
     const starttime = new Date()
     const userCollection = context.services.get('mongodb-atlas').db('__atlasforms').collection('users')
     this.userRecord = await userCollection.findOne({ _id: user })
-    console.log(`Fetch user record: ${new Date() - starttime}ms`)
+    this.timingInfo('Fetch user Record')
   }
 
   /* Return True is the user may do this , False if they may not */

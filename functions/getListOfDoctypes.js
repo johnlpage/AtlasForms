@@ -23,7 +23,7 @@ exports = async function (arg) {
       }
     }
   }
-
+  authorization.timingInfo('Get User Doctypes')
   /* System Doctypes at bottom of list */
 
   const canManageUsers = await authorization.authorize(authorization.USER_MANAGER)
@@ -49,6 +49,6 @@ exports = async function (arg) {
     atlasFormsPicklists.listViewFields = ['database', 'collection', 'fieldname']
     docTypes.push(atlasFormsPicklists)
   }
-
+  authorization.timingInfo('Get Admin Doctypes')
   return { ok: true, docTypes }
 }
