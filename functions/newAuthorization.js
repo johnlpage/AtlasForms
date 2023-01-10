@@ -27,6 +27,7 @@ class Authorization {
 
   async lookupUser (user) {
     // TODO:error handling
+    console.log(user);
     const starttime = new Date()
     const userCollection = context.services.get('mongodb-atlas').db('__atlasforms').collection('users')
     const cursor =  userCollection.find({ _id: user }).limit(1)
