@@ -1,5 +1,6 @@
 #!/bin/bash
 #If checking out locally, run this so your configs are not included in any pull requests
+
 #We don't add README to this, it has the appid in and still needs a manual mergels
 
 
