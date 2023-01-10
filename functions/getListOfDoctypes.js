@@ -1,5 +1,6 @@
 /* eslint-disable no-undef */
 exports = async function (arg) {
+  const s = new Date();
   /* Get an Authorization object - should be standard in any non private function */
   const authorization = await context.functions.execute('newAuthorization', context.user.id)
   if (authorization == null) { return { ok: false, message: 'User no Authorized' } }
@@ -50,5 +51,6 @@ exports = async function (arg) {
     docTypes.push(atlasFormsPicklists)
   }
   authorization.timingInfo('Done')
+  console.log(new Date()-s)
   return { ok: true, docTypes }
 }
