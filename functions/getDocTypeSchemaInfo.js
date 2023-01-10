@@ -24,7 +24,7 @@ exports = async function (docType) {
   /* Dynamically load some shared code */
   utilityFunctions = await context.functions.execute('utility_functions')
   const { namespace } = docType
-  console.log(`getDocTypeSchemaInfo:utility_functions ${start - new ISODate()}`)
+  console.log(`getDocTypeSchemaInfo:utility_functions ${start - new Date()}`)
 
   // Not users - see comment below
   if (['__atlasforms.doctypes', '__atlasforms.picklists'].includes(namespace)) {
