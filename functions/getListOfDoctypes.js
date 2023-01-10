@@ -49,6 +49,6 @@ exports = async function (arg) {
     atlasFormsPicklists.listViewFields = ['database', 'collection', 'fieldname']
     docTypes.push(atlasFormsPicklists)
   }
-  authorization.timingInfo('Get Admin Doctypes')
+  authorization.timingInfo('Done')
   return { ok: true, docTypes }
 }
