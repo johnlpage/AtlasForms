@@ -9,7 +9,7 @@
   }
   
   exports = async function(arg){
-  for(x=0;x<100;x++) {
+  for(x=0;x<10;x++) {
     await lookupUser("6374e49c7cc031132a154f32");
   }
   return {arg: arg};
