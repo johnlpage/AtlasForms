@@ -29,7 +29,9 @@ class Authorization {
     // TODO:error handling
     const starttime = new Date()
     const userCollection = context.services.get('mongodb-atlas').db('__atlasforms').collection('users')
-    this.userRecord = await userCollection.findOne({ _id: user })
+    const cursor =  userCollection.find({ _id: user }).limit(1)
+    this.userRecord = await cursor.next();
+    
     this.timingInfo('Fetch user Record')
   }
 
