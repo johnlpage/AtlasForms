@@ -9,10 +9,10 @@ a given collection. As it stands we just look at some of the existing docs */
 
 exports = async function (docType) {
   /* Get an Authorization object - should be standard in any non private function */
-  const start = new ISODate();
+  const start = new Date();
   const authorization = await context.functions.execute('newAuthorization', context.user.id)
   if (authorization == null) { return { ok: false, message: 'User no Authorized' } }
-  console.log(`getDocTypeSchemaInfo:newAuth ${start - new ISODate()}`)
+  console.log(`getDocTypeSchemaInfo:newAuth ${start - new Date()}`)
   // TODO - Change this to a specific security check that let's us manipulate the schema per person */
   // For now it's see the whole schema if you can read the doc.
 
@@ -35,7 +35,7 @@ exports = async function (docType) {
   const docTypeCollection = context.services.get('mongodb-atlas').db('__atlasforms').collection('doctypes')
   try {
     const docTypeInfo = await docTypeCollection.findOne({ namespace })
-    console.log(`getDocTypeSchemaInfo:findOne(namespace) ${start - new ISODate()}`)
+    console.log(`getDocTypeSchemaInfo:findOne(namespace) ${start - new Date()}`)
     if (docTypeInfo == null) {
       // Users as an exception it should be admin customisable to add info like manager or telephone
       // But by default it shoudl use the system definition
@@ -48,7 +48,7 @@ exports = async function (docType) {
       /* Create a Schema and store it in the record */
       console.log(JSON.stringify(docTypeInfo))
       const schema = await generateDefaultSchemaInfo(namespace)
-         console.log(`getDocTypeSchemaInfo:generate Schema ${start - new ISODate()}`)
+         console.log(`getDocTypeSchemaInfo:generate Schema ${start - new Date()}`)
       if (schema.ok !== false) {
         schemaAsText = JSON.stringify(schema, null, 2)
         await docTypeCollection.updateOne({ _id: docTypeInfo._id }, { $set: { schema: schemaAsText } })
